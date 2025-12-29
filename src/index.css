@@ -1,9 +1,13 @@
 @import "tailwindcss";
 
-*{
+body{
   background-color: #111;
 }
 
 .emr-button{
   background-color:  #10B981;
+}
+
+#Tasklist::-webkit-scrollbar{
+  display: none;
 }
