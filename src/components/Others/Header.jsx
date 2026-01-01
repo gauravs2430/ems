@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center text-white">
         <h1 className="text-2xl font-medium" >Hello  <br /> <span className="text-3xl font-semibold" >Gaurav 👋</span> </h1>
-        <button className="text-lg font-medium bg-red-500 text-white px-4 py-2 rounded-lg" >Log Out</button>
+        <button id="LogOut" className="text-lg font-medium bg-red-500 text-white px-4 py-2 rounded-lg" >Log Out</button>
     </div>
   );
 }
