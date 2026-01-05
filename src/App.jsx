@@ -9,28 +9,36 @@ import { AuthContext } from "./context/AuthProvider.jsx";
 
 const App = () => {
 
-  // useEffect (()=>{
-  //   SetLocalStorage();   
-  //   GetLocalStorage();
-  // },[])
+  const authData = useContext(AuthContext);
+
+  useEffect (()=>{
+    // localStorage.clear(); 
+    SetLocalStorage();   
+  },[authData])
+
+  useEffect(()=>{
+    const loggedInUser = localStorage.getItem('loggedInUser')
+    // console.log(loggedInUser);
+    if(loggedInUser){
+      console.log("UserLoggedIn Hai")
+
+    }
+    else{
+      console.log()
+    }
+
+  }, [])
 
   const [User, SetUser] = React.useState(null);
   const [LoggenInUserData , SetLoggedInUserData ] = React.useState(null);
-  const authData = useContext(AuthContext);
-
+  
 
   // console.log(authData.employees);
-
-  // useEffect(() => {
-  //   if (authData) {
-  //     const loggedInIUser = localStorage.getItem("loggedInUser");
-  //   }
-  // }, [authData])
 
   const handleLogin = (email, password) => {
     if (email == "admin@me.com" && password == "123") {
       SetUser('admin');
-      localStorage.setItem("LogedInUser", JSON.stringify({role: 'admin'}) );
+      localStorage.setItem("loggedInUser", JSON.stringify({role: 'admin'}));
     }
     else {
       if (authData) {
@@ -39,9 +47,8 @@ const App = () => {
           SetUser('employee');
           SetLoggedInUserData(employee);
           // console.log(employee);
-        localStorage.setItem("LogedInUser", JSON.stringify({role: 'employee'}));
-        }
-        
+        localStorage.setItem("loggedInUser", JSON.stringify({role: 'employee'}));
+        } 
       }
       else {
         alert("Invalid Credentials , Try again");

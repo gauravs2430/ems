@@ -13,7 +13,6 @@ createRoot(document.getElementById('root')).render(
 
     <AuthProvider>
       <App />
-      {/* <AdminDashboard/> */}
     </AuthProvider>
 
   </StrictMode>,
