@@ -29,7 +29,6 @@ const AllTask = () => {
         <h5>Status</h5>
       </div>
     </div>
-    
   );
 };
 

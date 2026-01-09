@@ -11,44 +11,53 @@ const App = () => {
 
   const authData = useContext(AuthContext);
 
-  useEffect (()=>{
+  useEffect(() => {
     // localStorage.clear(); 
-    SetLocalStorage();   
-  },[authData])
+    SetLocalStorage();
+  }, [authData]);
 
-  useEffect(()=>{
-    const loggedInUser = localStorage.getItem('loggedInUser')
+
+  const loggedInUser = localStorage.getItem('loggedInUser');
+  useEffect(() => {
+
     // console.log(loggedInUser);
-    if(loggedInUser){
-      console.log("UserLoggedIn Hai")
-
+    if (loggedInUser) {
+      const userData = JSON.parse(loggedInUser);
+      // console.log(userData)
+      // console.log(userData.role);
     }
-    else{
-      console.log()
+    else {
+      // console.log("UserLoggedIn Nahi Hai");
     }
 
-  }, [])
+  }, [loggedInUser]);
+
 
   const [User, SetUser] = React.useState(null);
-  const [LoggenInUserData , SetLoggedInUserData ] = React.useState(null);
-  
+  const [LoggenInUserData, SetLoggedInUserData] = React.useState(null);
+
 
   // console.log(authData.employees);
 
   const handleLogin = (email, password) => {
     if (email == "admin@me.com" && password == "123") {
       SetUser('admin');
-      localStorage.setItem("loggedInUser", JSON.stringify({role: 'admin'}));
+      const admin = (authData.admin.find((e) => e.email == email && e.password == password));
+      SetLoggedInUserData(admin);
+      // console.log(admin);
+      // console.log(authData.admin);
+
+      localStorage.setItem("loggedInUser", JSON.stringify({ role: 'admin', data: admin }));
     }
     else {
       if (authData) {
         const employee = (authData.employees.find((e) => e.email == email && e.password == password));
-        if(employee){
+        if (employee) {
           SetUser('employee');
           SetLoggedInUserData(employee);
-          // console.log(employee);
-        localStorage.setItem("loggedInUser", JSON.stringify({role: 'employee'}));
-        } 
+          console.log(employee);
+          localStorage.setItem("loggedInUser", JSON.stringify({ role: 'employee', data: employee }));
+        }
       }
       else {
         alert("Invalid Credentials , Try again");
@@ -59,9 +68,9 @@ const App = () => {
   return (
     <>
       {!User ? <Login handleLogin={handleLogin} /> : ''}
-      {User === 'admin' ? <AdminDashboard />:(User=="employee" ? <EmployeeDashboard 
-      data={LoggenInUserData}
-      />:null)}
+      {User === 'admin' ? <AdminDashboard data={LoggenInUserData} /> : (User == "employee" ? <EmployeeDashboard
+        data={LoggenInUserData}
+      /> : null)}
     </>
   );
 }

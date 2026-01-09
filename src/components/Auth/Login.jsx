@@ -1,12 +1,18 @@
 import React, { useEffect, useState } from "react";
 
-const Login = ({handleLogin}) => {
+const clearuser = () => {
+    localStorage.setItem("loggedInUser" , "");
+}
+
+const Login = ({ handleLogin }) => {
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
-    
+
+    clearuser() ; 
+
     const SubmitHandler = (e) => {
         e.preventDefault();
-        handleLogin(Email , Password);
+        handleLogin(Email, Password);
         // console.log("Form Submitted");
     }
     return (
