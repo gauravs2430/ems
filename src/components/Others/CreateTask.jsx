@@ -34,8 +34,10 @@ const CreateTask = () => {
             // console.log(e.firstname);
             if(e.firstname === assignTo){
                 // console.log("Yahi Hai Woh")
-                console.log(e);
-                console.log(e.tasks)
+                // console.log(e);
+                // console.log(e.tasks);
+                e.tasks.push(newTask);
+                console.log(e)
             }
         })
 
