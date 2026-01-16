@@ -34,7 +34,7 @@ const CreateTask = () => {
             completed: false,
         };
 
-        // console.log(task);
+        // console.log(task);                                                                        
 
         const data = JSON.parse(localStorage.getItem("employees"));
 

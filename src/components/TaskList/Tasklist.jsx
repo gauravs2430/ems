@@ -3,14 +3,15 @@ import AcceptTask from '../TaskList/AcceptTask'
 import NewTask from './NewTask';
 import CompleteTask from "../TaskList/CompleteTask"
 import FailedTask from '../TaskList/FailedTask'
-import AuthProvider, { AuthContext } from "../../context/AuthProvider.jsx";
+import { AuthContext } from "../../context/AuthProvider.jsx";
+// import React, { useContext } from 'react';
 
 
 const Tasklist = ({ data }) => {
-  // console.log(data.tasks)
+  console.log(data.tasks)
   
-  const userData = useContext(AuthContext);
-
+  const userData = React.useContext(AuthContext);
+  // console.log(userData)
 
   return (
     <div
@@ -25,7 +26,7 @@ const Tasklist = ({ data }) => {
         }
 
         if (task.newtask) {
-          return <NewTask key={index} task={task}/>;
+          return <NewTask key={index} userData={user} task={task}/>;
         }
 
         if (task.completed) {

@@ -53,7 +53,7 @@ const App = () => {
         if (employee) {
           SetUser('employee');
           SetLoggedInUserData(employee);
-          console.log(employee);
+          // console.log(employee);
           localStorage.setItem("loggedInUser", JSON.stringify({ role: 'employee', data: employee }));
         }
       }
