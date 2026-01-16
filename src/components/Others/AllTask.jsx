@@ -1,9 +1,23 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../context/AuthProvider';
+import React, { useState } from 'react';
+import { useContext } from 'react';
+import { useEffect } from 'react';
+// import { AuthContext } from '../../context/AuthProvider';
 
 const AllTask = () => {
+  // const [authData, setAuthData] = React.useState(null);
 
-  const authData = useContext(AuthContext);
+  const [employees, setEmployees] = useState([]);
+  const [admins, setAdmins] = useState([]);
+
+  useEffect(() => {
+    const storedEmployees =
+      JSON.parse(localStorage.getItem("employees")) || [];
+
+    setEmployees(storedEmployees);
+  }, []);
+
+
+  // console.log(employees);
 
   return (
     <div className='bg-[#1C1C1C] p-5 mt-5 rounded-xl text-white h-75'>
@@ -17,7 +31,7 @@ const AllTask = () => {
       </div>
 
       <div className='h-[85%] overflow-auto'>
-        {authData.employees.map((elem) => {
+        {employees.map((elem) => {
           // console.log(elem);
           return (
             <div className="bg-black-800 border-1 text-white border-emerald-400 rounded-lg mb-2 py-2 px-4 flex justify-between">

@@ -3,10 +3,15 @@ import AcceptTask from '../TaskList/AcceptTask'
 import NewTask from './NewTask';
 import CompleteTask from "../TaskList/CompleteTask"
 import FailedTask from '../TaskList/FailedTask'
+import AuthProvider, { AuthContext } from "../../context/AuthProvider.jsx";
+
 
 const Tasklist = ({ data }) => {
   // console.log(data.tasks)
   
+  const userData = useContext(AuthContext);
+
+
   return (
     <div
       id="Tasklist"

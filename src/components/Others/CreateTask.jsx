@@ -2,15 +2,15 @@ import React from 'react';
 
 const CreateTask = () => {
 
-    const [taskTitle , settaskTitle] = React.useState("");
-    const [taskDescription , settaskDescription] = React.useState("");
-    const [taskDate , settaskDate] = React.useState("");
-    const [assignTo , setassignTo] = React.useState("");
-    const [category , setcategory] = React.useState("") ;
+    const [taskTitle, settaskTitle] = React.useState("");
+    const [taskDescription, settaskDescription] = React.useState("");
+    const [taskDate, settaskDate] = React.useState("");
+    const [assignTo, setassignTo] = React.useState("");
+    const [category, setcategory] = React.useState("");
 
-    const [newTask , setNewTask] = React.useState({});
+    // const [newTask , setNewTask] = React.useState({});
 
-     
+
     const submitHandler = (e) => {
         e.preventDefault();
         // console.log(e.target);
@@ -23,44 +23,53 @@ const CreateTask = () => {
         setassignTo("");
         setcategory("");
 
-        setNewTask({taskTitle , taskDescription , taskDate , assignTo , category , active:false , newTask:true , failed: true , completed : false});
+        const task = {
+            taskTitle,
+            taskDescription,
+            taskDate,
+            category,
+            active: false,
+            newTask: true,
+            failed: true,
+            completed: false,
+        };
 
         // console.log(task);
 
         const data = JSON.parse(localStorage.getItem("employees"));
+
         // console.log(data);
 
-        data.forEach((e)=>{
-            // console.log(e.firstname);
-            if(e.firstname === assignTo){
-                // console.log("Yahi Hai Woh")
+        data.forEach((e) => {
+            if (e.firstname === assignTo) {
                 // console.log(e);
                 // console.log(e.tasks);
-                e.tasks.push(newTask);
-                console.log(e)
+                e.tasks.push(task);
+                e.taskCounts.newTask += 1 ; 
             }
-        })
+        });
 
+        localStorage.setItem("employees" , JSON.stringify(data));
+
+        // console.log(data)
     }
 
-    
     return (
         <div>
             <div className='pt-12 text-white'>
-                <form 
-                
-                onSubmit={(e) => {
-                    submitHandler(e);
-                    // console.log(e.target);
+                <form
+                    onSubmit={(e) => {
+                        submitHandler(e);
+                        // console.log(e.target);
 
-                }} className='flex justify-between gap-6 border-1 border-emerald-300 p-8 rounded-xl'>
+                    }} className='flex justify-between gap-6 border-1 border-emerald-300 p-8 rounded-xl'>
                     <div className='w-[45%] flex flex-col gap-4'>
                         <div>
                             <h3 className="mb-1">Task Title</h3>
                             <input
-                            required
-                            value = {taskTitle}
-                                onChange={(e)=>{
+                                required
+                                value={taskTitle}
+                                onChange={(e) => {
                                     // console.log(e.target.value);
                                     settaskTitle(e.target.value)
                                 }}
@@ -72,9 +81,9 @@ const CreateTask = () => {
                         <div>
                             <h3 className="mb-1">Date</h3>
                             <input
-                            required
-                            value={taskDate}
-                                onChange={(e)=>{
+                                required
+                                value={taskDate}
+                                onChange={(e) => {
                                     // console.log(e.target.value);
                                     settaskDate(e.target.value)
                                 }}
@@ -85,9 +94,9 @@ const CreateTask = () => {
                         <div>
                             <h3 className="mb-1">Assign To</h3>
                             <input
-                            required
-                            value={assignTo}
-                                onChange={(e)=>{
+                                required
+                                value={assignTo}
+                                onChange={(e) => {
                                     // console.log(e.target.value);
                                     setassignTo(e.target.value)
                                 }}
@@ -99,9 +108,9 @@ const CreateTask = () => {
                         <div>
                             <h3 className="mb-1">Category</h3>
                             <input
-                            required
-                            value={category}
-                                onChange={(e)=>{
+                                required
+                                value={category}
+                                onChange={(e) => {
                                     // console.log(e.target.value);
                                     setcategory(e.target.value)
                                 }}
@@ -115,9 +124,9 @@ const CreateTask = () => {
                         <div>
                             <h3 className="mb-1">Description</h3>
                             <textarea
-                            required
-                            value={taskDescription}
-                                onChange={(e)=>{
+                                required
+                                value={taskDescription}
+                                onChange={(e) => {
                                     // console.log(e.target.value);
                                     settaskDescription(e.target.value)
                                 }}

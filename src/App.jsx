@@ -13,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     // localStorage.clear(); 
-    SetLocalStorage();
+    // SetLocalStorage();
   }, [authData]);
 
 
@@ -29,13 +29,11 @@ const App = () => {
     else {
       // console.log("UserLoggedIn Nahi Hai");
     }
-
   }, [loggedInUser]);
 
 
   const [User, SetUser] = React.useState(null);
   const [LoggenInUserData, SetLoggedInUserData] = React.useState(null);
-
 
   // console.log(authData.employees);
 
