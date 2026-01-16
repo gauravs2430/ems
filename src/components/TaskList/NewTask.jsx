@@ -20,5 +20,6 @@ const NewTask = ({task}) => {
         </div>
   );
 };
+  
 
 export default NewTask;
